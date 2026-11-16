@@ -16,6 +16,10 @@
   <a href="https://angular.dev/"><img src="https://img.shields.io/badge/Angular-22-DD0031?logo=angular&logoColor=white" alt="Angular 22"></a>
   <a href="https://flutter.dev/"><img src="https://img.shields.io/badge/Flutter-3.47.8-02569B?logo=flutter&logoColor=white" alt="Flutter"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"></a>
+  <a href="https://github.com/georgevictorkamal/Kinevor-Gym/actions/workflows/codeql.yml"><img src="https://github.com/georgevictorkamal/Kinevor-Gym/actions/workflows/codeql.yml/badge.svg" alt="CodeQL"></a>
+  <a href="https://scorecard.dev/viewer/?uri=github.com/georgevictorkamal/Kinevor-Gym"><img src="https://api.securityscorecards.dev/projects/github.com/georgevictorkamal/Kinevor-Gym/badge" alt="OpenSSF Scorecard"></a>
+  <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome"></a>
+  <a href="https://github.com/georgevictorkamal/Kinevor-Gym/labels/good%20first%20issue"><img src="https://img.shields.io/github/issues/georgevictorkamal/Kinevor-Gym/good%20first%20issue?label=good%20first%20issues&color=7057ff" alt="Good first issues"></a>
 </p>
 
 <p align="center">
@@ -27,6 +31,49 @@
 </p>
 
 ---
+
+<p align="center">
+  <img src="docs/media/demo.gif" alt="A 20-second tour of the Kinevor public site and members app" width="820">
+</p>
+
+## 🚀 Try it in one command
+
+```bash
+git clone https://github.com/georgevictorkamal/Kinevor-Gym.git
+cd Kinevor-Gym
+npm run demo:up
+```
+
+Then open **http://localhost:4208** (public site), **http://localhost:4202**
+(members) or **http://localhost:4207** (staff dashboard).
+
+For a smaller showcase that starts only the public site and members services:
+
+```bash
+npm run demo:up:showcase
+```
+
+The first build needs Docker with Compose v2 and about 8 GB of disk; later runs
+reuse cached layers. Everything binds to `127.0.0.1` only. See the
+[deployment guide](docs/deployment.md) for the port map and production caveats.
+
+Prefer not to build anything? Tagged releases publish all 19 demo images to
+GitHub Container Registry:
+
+```bash
+npm run demo:images
+```
+
+Pin a release with `KINEVOR_VERSION=0.2.1 npm run demo:images`. On PowerShell,
+set `$env:KINEVOR_VERSION = "0.2.1"` first.
+
+## 💡 Why Kinevor
+
+- **Ten independent services.** Each has its own .NET API and an Angular or Flutter client, and no module references another. `npm run verify` enforces it.
+- **Executable architecture.** 22 repository checks cover module independence, version alignment, i18n parity, OpenAPI snapshots and release guardrails.
+- **Secure by default.** Demo hosts refuse to start outside Development or Demo, Docker ports are loopback-only, the image fails closed, there is no committed signing key, and CI is SHA-pinned with CodeQL and Dependabot.
+- **Verifiable releases.** Tagged releases ship an SBOM and build provenance attestation.
+- **Tested end to end.** 482 automated tests: 209 .NET, 99 Angular, 128 Flutter and 46 Playwright with axe accessibility checks.
 
 ![Kinevor public website](docs/screenshots/public-web.png)
 
@@ -71,8 +118,8 @@ domain to UI.
 <tr>
 <td>
 
-### ✅ 481 Automated Tests
-208 .NET + 99 Angular + 128 Flutter unit tests plus 46 Playwright end-to-end
+### ✅ 482 Automated Tests
+209 .NET + 99 Angular + 128 Flutter unit tests plus 46 Playwright end-to-end
 checks covering domain rules, HTTP endpoints, gateways, components, screen
 states, accessibility and responsive layouts — all passing in CI.
 
@@ -112,7 +159,7 @@ Material 3 and golden tests) and API (ASP.NET Core 10 with MediatR CQRS).
 | **Backend** | 10 ASP.NET Core 10 APIs, EF Core 10, SQLite, MediatR |
 | **Web** | 9 Angular 22 libraries with runnable demos |
 | **Mobile** | 9 Flutter packages with runnable examples |
-| **Automated tests** | **481** — 208 .NET · 99 Angular · 128 Flutter · 46 Playwright |
+| **Automated tests** | **482** — 209 .NET · 99 Angular · 128 Flutter · 46 Playwright |
 | **Screenshots** | 57 captured from the running applications |
 | **CI** | Hygiene, backend/web/mobile matrices, coverage, E2E, CodeQL, dependency review, Scorecard |
 
@@ -290,11 +337,11 @@ See [SECURITY.md](SECURITY.md) for details.
 
 | Suite | Tests | Result |
 | --- | ---: | --- |
-| .NET — platform + 10 module APIs | 208 | ✅ passed |
+| .NET — platform + 10 module APIs | 209 | ✅ passed |
 | Angular — 9 module libraries | 99 | ✅ passed |
 | Flutter — 9 packages | 128 | ✅ passed |
 | Playwright E2E — public site + members | 46 | ✅ passed |
-| **Total** | **481** | **✅ all passed** |
+| **Total** | **482** | **✅ all passed** |
 
 .NET tests run with `coverlet.collector`; CI publishes a Cobertura report per
 service. Playwright runs every audited route at 1440×1040 and 390×844, checks
@@ -408,6 +455,7 @@ This is a portfolio reference implementation, deliberately scoped:
 | [ADRs](docs/adr/) | Architecture decision records |
 | [Security](SECURITY.md) | Security policy, demo caveats and deployment checklist |
 | [Contributing](CONTRIBUTING.md) | How to build, test and open a change |
+| [Support](SUPPORT.md) | Where to ask questions and report problems |
 | [Code of Conduct](CODE_OF_CONDUCT.md) | Community standards |
 | [Changelog](CHANGELOG.md) | Release history |
 
@@ -433,6 +481,13 @@ The public repository is
 The Angular packages use the `@georgevictorkamal/*` scope and are built from this
 monorepo; they are not yet published to a public npm registry. See each module's
 `PUBLISHING.md` for the optional GitHub Packages flow.
+
+## 🤝 Contribute
+
+New here? Start with a [good first issue](https://github.com/georgevictorkamal/Kinevor-Gym/labels/good%20first%20issue),
+read [CONTRIBUTING.md](CONTRIBUTING.md) and ask questions in
+[Discussions](https://github.com/georgevictorkamal/Kinevor-Gym/discussions). If
+Kinevor is useful to you, a ⭐ helps other developers find it.
 
 ## 📄 License
 
